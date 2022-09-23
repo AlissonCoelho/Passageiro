@@ -66,23 +66,69 @@ const cabecalho = () => {
     tr.classList.add('tableHeader');
 }
 
-// //Function to show tasks
+//Function to show tasks
 const mostrarViagens = () => {
     tbody.innerHTML = '';
     cabecalho();
     viagens.forEach((v) => {
 
+        //Cria os elementos da linha da tabela
         let tr = tbody.insertRow();
         let Destino = tr.insertCell();
         let Inicio = tr.insertCell();
         let Dias = tr.insertCell();
         let Opcoes = tr.insertCell();
 
+        //botões de edição e delete
+        //Elemento div que contem os botões
+        let Div = document.createElement('div');
+        Div.classList.add('buttonGroup');
+
+        //Elemento botão de edição com todos atributos
+        let btnEdi = document.createElement('button');
+        btnEdi.classList.add('button');
+        btnEdi.classList.add('secondary');
+        btnEdi.setAttribute('data-id', v.id);
+        btnEdi.onclick = () => {
+            active('tela2');
+
+        }
+
+        //Elemento botão de delete com todos atributos
+        let btnDel = document.createElement('button');
+        btnDel.classList.add('button');
+        btnDel.classList.add('danger');
+        btnDel.setAttribute('data-id', v.id);
+        btnDel.onclick = () => {
+
+        }
+
+        //Elemento imagem de edição
+        let imgEdi = document.createElement('img');
+        imgEdi.setAttribute("src", "/Images/edit.png");
+        imgEdi.setAttribute("width", "16");
+        imgEdi.setAttribute("height", "16");
+
+        //Elemento imagem de delete
+        let imgDel = document.createElement('img');
+        imgDel.setAttribute("src", "/Images/delete.png");
+        imgDel.setAttribute("width", "16");
+        imgDel.setAttribute("height", "16");
+
+        //Insere imagens dentro dos botões
+        btnEdi.appendChild(imgEdi);
+        btnDel.appendChild(imgDel);
+
+        //Insere botões dentro do div
+        Div.appendChild(btnEdi);
+        Div.appendChild(btnDel);
+
+        //Define os valores dos elementos tr da tabela
         tr.setAttribute('data-id', v.id);
         Destino.innerHTML = v.Destino;
         Inicio.innerHTML = v.Inicio;
         Dias.innerHTML = v.Dias.length;
-        Opcoes.innerHTML = 'edi/del';
+        Opcoes.appendChild(Div);
 
     })
     state.innerHTML = viagens.length;
@@ -99,7 +145,6 @@ const active = (comp) => {
 }
 
 //Add Viagem
-
 const addViagem = (addDestino, addInico, addDias) => {
     //Verifica se destino é diferente de vazio
     if (addDestino.value != '') {
