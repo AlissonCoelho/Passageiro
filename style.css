@@ -1,0 +1,417 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12pt;
+  font-weight: normal;
+  line-height: 1.5rem;
+}
+
+/**************BACKGROUND**************/
+#blank {
+  text-align: center;
+  padding-top: 2rem;
+  width: 100%;
+  opacity: 0.25;
+}
+/*anything inside this 'blank' give the formatation*/
+#blank * {
+  text-align: center;
+}
+body {
+  padding-top: 4rem;
+  background-color: rgb(218, 222, 227);
+  padding-bottom: 4rem;
+  
+}
+
+.hidden {
+  display: none;
+}
+
+/**************BUTTONS**************/
+/*default button*/
+.button {
+  height: 2rem;
+  min-width: 2rem;
+  padding: 0.25rem 0.4rem;
+  border-radius: 0.3rem;
+  color: #000;
+  background-color: #edf6f9;
+  border: thin solid #dce5e8;
+  line-height: 0.75rem;
+}
+.button:active {
+  height: 2rem;
+  min-width: 2rem;
+  padding: 0.25rem 0.4rem;
+  border-radius: 0.3rem;
+  color: #000;
+  background-color: #cbd4d7;
+  border: thin solid #dac3c6;
+}
+/*full space button*/
+.buttonGroup {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+/*all button inside .buttonGroup*/
+.buttonGroup .button {
+  flex: 1;
+  border-radius: 0;
+}
+/*first button*/
+.buttonGroup .button:first-child {
+  border-radius: 0.35rem 0 0 0.35rem;
+}
+/*last button*/
+.buttonGroup .button:last-child {
+  border-radius: 0 0.35rem 0.35rem 0;
+}
+/*just one button*/
+.buttonGroup .button:first-child:last-child {
+  border-radius: 00.35rem 0.35rem 0.35rem 0.35rem;
+}
+/*half size*/
+.buttonGroup .half {
+  flex: 0.5;
+}
+
+/*1/3 size*/
+.buttonGroup .third {
+  flex: 0.3333;
+}
+
+/*1/4 size*/
+.buttonGroup .quarter {
+  flex: 0.25;
+}
+
+/**************TEXT**************/
+h1 {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+h2 {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+h3 {
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+p {
+  margin-top: 1rem;
+  text-align: justify;
+}
+
+/**************HEADER**************/
+.headerBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #1d3a4e;
+  color: #fff;
+  height: 5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.appName {
+  font-size: 2rem;
+  margin-left: 1rem;
+}
+
+.badge {
+  border: thin solid black;
+  border-radius: 0.75rem;
+  min-width: 1.25rem;
+  text-align: center;
+  background-color: #fff;
+  color: #000;
+  margin-right: 1rem;
+}
+
+/**************COMPONENTS**************/
+.component {
+  padding: 1rem;
+}
+
+.componentHeader {
+  position: fixed;
+  left: 0;
+  padding: 1rem 0;
+  background-color: rgb(218, 222, 227);
+  height: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.componentTitle {
+  margin-left: 1rem;
+  flex: 1;
+}
+
+.componentTitle ~ *:last-child {
+  margin-right: 1rem;
+}
+
+.componentContent {
+  padding: 1rem;
+}
+
+.componentHeader + .componentContent {
+  padding-top: 5.5rem;
+}
+
+/**************NAVEGATION**************/
+.nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  color: #000;
+  background: #edf6f9;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*any element after .nav with isn't .bottom*/
+.nav:not(.bottom) ~ * {
+  margin-top: 4rem;
+}
+.nav .buttonGroup {
+  flex: 1;
+}
+
+.nav .button {
+  height: 4rem;
+}
+.nav .buttonGroup .button:first-child,
+.nav .buttonGroup .button:last-child {
+  border-radius: 0;
+}
+/**************FORMS**************/
+.field {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.field label {
+  margin-right: 1rem;
+}
+.field input {
+  flex: 1;
+  height: 2rem;
+  padding: 0.3rem 0.7rem;
+  color: #000;
+  background: #edf6f9;
+  border: thin solid #dce5e8;
+  border-radius: 0.35rem;
+}
+
+.field label.fixed {
+  width: 4rem;
+}
+
+input.valid {
+  border: thin solid #06594b;
+}
+input.invalid {
+  border: thin solid #9a0001;
+}
+/**************LIST**************/
+.list {
+  width: 100%;
+  list-style: none;
+}
+.list li {
+  padding: 1rem;
+  color: #000;
+  background: rgb(228, 232, 237);
+  border-color: #999;
+  border-style: solid;
+  border-width: 0 thin thin thin;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list li:first-child {
+  border-top-width: thin;
+  border-radius: 0.35rem 0.35rem 0 0;
+}
+.list li:last-child {
+  border-radius: 0 0 0.35rem 0.35rem;
+}
+li.active {
+  color: #fff;
+  background-color: #3b78ac;
+  border: thin solid #2a679b;
+}
+/**************TABLE**************/
+.table {
+  width: 100%;
+  list-style: none;
+}
+.table tr {
+  margin: 0;
+  padding: 0;
+  padding: 1rem;
+  color: #000;
+  background: #edf6f9;
+  border-color: #000;
+  border-style: solid;
+  border-width: 0 thin thin thin;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.trGroup td {
+  min-width: 4rem;
+  min-height: 2rem;
+  max-width: 15rem;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  word-break: normal;
+}
+.table tr:first-child {
+  border-top-width: thin;
+  border-radius: 0.35rem 0.35rem 0 0;
+}
+.table tr:last-child {
+  border-radius: 0 0 0.35rem 0.35rem;
+}
+/*just one line on table*/
+.table tr:first-child:last-child {
+  border-radius: 00.35rem 0.35rem 0.35rem 0.35rem;
+}
+tr.tableHeader {
+  color: #fff;
+  background-color: #3b78ac;
+  border: thin solid #000;
+}
+/**************COLORS**************/
+.active {
+  color: #fff;
+  background-color: #3b78ac;
+  border: thin solid #2a679b;
+}
+.header {
+  color: #fff;
+  background-color: #1d3a4e;
+  border: thin solid #0c293d;
+}
+.active:active {
+  color: #fff;
+  background-color: #19568a;
+  border: thin solid #084579;
+}
+
+.primary {
+  color: #fff;
+  background-color: #3b78ac;
+  border: thin solid #2a679b;
+}
+.primary:active {
+  color: #fff;
+  background-color: #19568a;
+  border: thin solid #084579;
+}
+
+.secondary {
+  color: #000;
+  background-color: #cddfeb;
+  border: thin solid #bccead;
+}
+.secondary:active {
+  color: #000;
+  background-color: #abbd9c;
+  border: thin solid #9aac8d;
+}
+
+.success {
+  color: #fff;
+  background-color: #2a9d8f;
+  border: thin solid #198c7e;
+}
+.success:active {
+  color: #fff;
+  background-color: #087b6d;
+  border: thin solid #06594b;
+}
+
+.warning {
+  color: #000;
+  background-color: #ffd166;
+  border: thin solid #eec055;
+}
+.warning:active {
+  color: #000;
+  background-color: #ddb033;
+  border: thin solid #cca011;
+}
+
+.danger {
+  color: #fff;
+  background-color: #ef233c;
+  border: thin solid #de122b;
+}
+.danger:active {
+  color: #fff;
+  background-color: #ab0004;
+  border: thin solid #9a0001;
+}
+
+.ligth {
+  color: #000;
+  background-color: #edf6f9;
+  border: thin solid #dce5e8;
+}
+.ligth:active {
+  color: #000;
+  background-color: #cbd4d7;
+  border: thin solid #dac3c6;
+}
+
+.dark {
+  color: #fff;
+  background-color: #1d3a4e;
+  border: thin solid #0c293d;
+}
+.dark:active {
+  color: #ddd;
+  background-color: #0a071b;
+  border: thin solid #080407;
+}
+
+/**************SPACING**************/
+.mt1 {
+  margin-top: 0.75rem;
+  padding-left: 0.75rem;
+}
+.mt2 {
+  margin-top: 1.5rem;
+}
+.mt3 {
+  margin-top: 2rem;
+}
+.mt4 {
+  margin-top: 3rem;
+}

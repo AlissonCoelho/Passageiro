@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Passageiro</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="manifest"
+      href="./manifest.webmanifest"
+      crossorigin="use-credentials"
+    />
+    <link rel="icon" type="image/png" href="./assets/appicons/favicon.ico" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Tô Ferrado" />
+    <link rel="icon" href="Images/Hills.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="./assets/appicons/apple-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="./assets/appicons/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="./assets/appicons/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="./assets/appicons/apple-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./assets/appicons/apple-icon-180x180.png"
+    />
+  </head>
+  <body>
+    <header class="headerBar header">
+      <div class="appName">Passageiro</div>
+      <button class="badge secondary">
+        <span id="state">0</span>
+      </button>
+    </header>
+    <!--*****************Tela1 Tabela de viagens*****************-->
+    <div id="tela1" class="component">
+      <div class="componentHeader">
+        <h1 class="componentTitle">Minhas Viagens</h1>
+        <button id="btnAdd" class="button primary">
+          <img src="/Images/plus1.png" width="16" height="16" />
+        </button>
+      </div>
+      <!-- Tabela de viagens -->
+      <div class="componentContent">
+        <table id="table" class="table mt1">
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!--*****************Tela2 Formulario*****************-->
+    <div id="tela2" class="component hidden">
+      <div class="componentHeader">
+        <h1 class="componentTitle">Adicionar Viagem</h1>
+      </div>
+      <div class="componentContent">
+        <div class="field mt1">
+          <label for="addDestino" class="fixed">Destino</label>
+          <input id="addDestino" class="valid" autocomplete="off" />
+        </div>
+        <div class="field mt1">
+          <label for="addInico" class="fixed">Data Inicio</label>
+          <input id="addInico" class="valid" autocomplete="off" />
+          <label for="addDias" class="fixed mt1">Dias</label>
+          <input id="addDias" class="valid" autocomplete="off" />
+        </div>
+        <div class="buttonGroup mt1">
+          <button id="btnCanc1" class="button quarter ligth">Calcela</button>
+          <button id="btnAddViagem" class="button quarter primary">
+            Adicionar
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="./script.js"></script>
+</html>
