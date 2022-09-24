@@ -1,12 +1,12 @@
 {
-    "name": "I'm screwed - Task Management",
-    "short_name": "I'm screwed",
+    "name": "Passageiro - Viagens",
+    "short_name": "Passageiro",
     "start_url": ".",
     "display": "standalone",
     "theme_color": "#3b78ac",
     "background_color": "rgb(218, 222, 227)",
     "orientation": "portrait",
-    "description": "Simple and objective web application for task management",
+    "description": "Uma aplicação com o objetivo de audar a planear, gerenciae e registrar viagens",
     "icons": [
       {
         "src": "./Images/appicons/android-icon-48x48.png",

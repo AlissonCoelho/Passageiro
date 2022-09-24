@@ -12,7 +12,7 @@ self.addEventListener('install', function (event) {
       '/styles.js',
       '/Images/delete.png',
       '/Images/edit.png',
-      '/Images/hangloose.png',
+      '/Images/Hills.png',
       '/Images/plus0.png',
       '/Images/plus1.png',
       '/Images/appicons/favicon.ico',

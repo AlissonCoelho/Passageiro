@@ -1,9 +1,9 @@
-//******SERVICE WORKER*******
+//****** SERVICE WORKER *******
 //Service Worker
-// if (navigator.serviceWorker) {
-//     //Register
-//     navigator.serviceWorker.register("/sw.js");
-// }
+if (navigator.serviceWorker) {
+    //Register
+    navigator.serviceWorker.register("/sw.js");
+}
 
 //******APLICATION*******
 
