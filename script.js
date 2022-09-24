@@ -16,6 +16,7 @@ let btnAdd = document.querySelector('#btnAdd');
 let btnCanc1 = document.querySelector('#btnCanc1');
 let tbody = document.querySelector('#tbody');
 let badge = document.querySelector('#badge');
+let qtdViagens = document.querySelector('#qtdViagens');
 let tituloTela2 = document.querySelector('#tituloTela2');
 let btnsAdd = document.querySelector('#btnsAdd');
 let btnsEdi = document.querySelector('#btnsEdi');
@@ -25,7 +26,14 @@ let btnEditViagem = document.querySelector('#btnEditViagem');
 let viagens = []
 //When app is load
 onload = () => {
-    cabecalho();
+
+    //Carrega em local storage
+    const v = JSON.parse(localStorage.getItem('viagens'));
+    //Verifica se v diferente de null
+    if (v)
+        viagens = v;
+
+    mostrarViagens();
     btnAdd.onclick = () => {
         active('tela2');
         tituloTela2.innerHTML = 'Adicionar Viagem';
@@ -34,6 +42,10 @@ onload = () => {
         btnsEdi.classList.add('hidden');
     }
     badge.onclick = () => {
+        inputDestino.value = '';
+        inputInico.value = '';
+        inputDias.value = '';
+        inputDestino.removeAttribute('data-id');
         active('tela1');
     }
     btnCanc1.onclick = () => {
@@ -55,9 +67,6 @@ onload = () => {
     btnEditViagem.onclick = () => {
         editViagem(inputDestino, inputInico, inputDias);
     }
-    // document.querySelector('#btnDel').onclick = () => {
-    //     delTask(document.querySelector('#InputEditTask'));
-    // }
 }
 
 //Cria cabeçalho
@@ -69,7 +78,29 @@ const cabecalho = () => {
     let Opcoes = tr.insertCell();
 
     Destino.innerHTML = 'Destino';
+    Destino.onclick = () => {
+        viagens.sort((a, b) => {
+            if (a.Destino < b.Destino)
+                return -1;
+            if (a.Destino > b.Destino)
+                return 1;
+            return 0;
+        })
+        mostrarViagens();
+    }
+
     Inicio.innerHTML = 'Inicio';
+    Inicio.onclick = () => {
+        viagens.sort((a, b) => {
+            if (a.Inicio < b.Inicio)
+                return -1;
+            if (a.Inicio > b.Inicio)
+                return 1;
+            return 0;
+        })
+        mostrarViagens();
+    }
+
     Dias.innerHTML = 'Dias';
     Opcoes.innerHTML = 'Opções';
     tr.classList.add('tableHeader');
@@ -108,6 +139,7 @@ const mostrarViagens = () => {
             //Ativa botões de edição
             btnsAdd.classList.add('hidden');
             btnsEdi.classList.remove('hidden');
+
             //Define valores nos campos
             inputDestino.value = v.Destino;
             inputDestino.setAttribute('data-id', v.id);
@@ -123,7 +155,7 @@ const mostrarViagens = () => {
         btnDel.classList.add('danger');
         btnDel.setAttribute('data-id', v.id);
         btnDel.onclick = () => {
-
+            delViagem(v.id);
         }
 
         //Elemento imagem de edição
@@ -154,7 +186,8 @@ const mostrarViagens = () => {
         Opcoes.appendChild(Div);
 
     })
-    badge.innerHTML = viagens.length;
+    qtdViagens.innerHTML = viagens.length;
+
 }
 
 //Active screens
@@ -192,7 +225,7 @@ const addViagem = (inputDestino, inputInico, inputDias) => {
 
         active('tela1');
         mostrarViagens();
-        // saveTasks();
+        salvarViagens();
 
     }
 }
@@ -223,23 +256,19 @@ const editViagem = (inputDestino, inputInico, inputDias) => {
         inputDestino.removeAttribute('data-id');
         active('tela1');
         mostrarViagens();
+        salvarViagens();
     }
 }
 
-// //Delete Task
-// const delTask = (InputEditTask) => {
-//     if (InputEditTask.value != '') {
-//         let idTask = InputEditTask.getAttribute('data-id');
-//         tasks = tasks.filter((t)=> t.id != idTask);
-//         InputEditTask.value = '';
-//         InputEditTask.removeAttribute('data-id');
-//         active('screen1');
-//         saveTasks();
-//         showTasks();
-//     }
-// }
+//Delete Viagem
+const delViagem = (idViagem) => {
+    viagens = viagens.filter((v) => v.id != idViagem);
+    active('tela1');
+    mostrarViagens();
+    salvarViagens();
+}
 
-// const saveTasks = () =>{
-//     localStorage.setItem('tasks', JSON.stringify(tasks));
-// }
+const salvarViagens = () => {
+    localStorage.setItem('viagens', JSON.stringify(viagens));
+}
 

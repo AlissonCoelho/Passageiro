@@ -8,14 +8,15 @@
 }
 
 /**************BACKGROUND**************/
-#blank {
+.backgrund {
+  position: absolute;
   text-align: center;
-  padding-top: 2rem;
-  width: 100%;
   opacity: 0.25;
+  width: 100%;
+  height: 100%;
 }
 /*anything inside this 'blank' give the formatation*/
-#blank * {
+.backgrund * {
   text-align: center;
 }
 body {
@@ -264,7 +265,6 @@ li.active {
 /**************TABLE**************/
 .table {
   width: 100%;
-  list-style: none;
 }
 .table tr {
   margin: 0;
@@ -278,18 +278,15 @@ li.active {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
 }
-.trGroup td {
-  min-width: 4rem;
-  min-height: 2rem;
-  max-width: 15rem;
-  align-items: center;
+.table tr td {
+  flex: 1;
+  text-align: center;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  word-break: normal;
 }
+
 .table tr:first-child {
   border-top-width: thin;
   border-radius: 0.35rem 0.35rem 0 0;
@@ -305,6 +302,9 @@ tr.tableHeader {
   color: #fff;
   background-color: #3b78ac;
   border: thin solid #000;
+}
+.tableHeader button {
+  width: 200%;
 }
 /**************COLORS**************/
 .active {
