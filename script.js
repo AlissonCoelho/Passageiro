@@ -21,6 +21,9 @@ let tituloTela2 = document.querySelector('#tituloTela2');
 let btnsAdd = document.querySelector('#btnsAdd');
 let btnsEdi = document.querySelector('#btnsEdi');
 let btnEditViagem = document.querySelector('#btnEditViagem');
+let tituloTela3 = document.querySelector('#tituloTela3');
+let salvarDias = document.querySelector('#salvarDias');
+let listaDiasViagem = document.querySelector('#listaDiasViagem');
 
 
 let viagens = []
@@ -67,6 +70,10 @@ onload = () => {
     btnEditViagem.onclick = () => {
         editViagem(inputDestino, inputInico, inputDias);
     }
+    salvarDias.onclick = () => {
+        salvarViagens();
+        active('tela1');
+    }
 }
 
 //Cria cabeçalho
@@ -87,6 +94,7 @@ const cabecalho = () => {
             return 0;
         })
         mostrarViagens();
+        salvarViagens();
     }
 
     Inicio.innerHTML = 'Inicio';
@@ -99,6 +107,7 @@ const cabecalho = () => {
             return 0;
         })
         mostrarViagens();
+        salvarViagens();
     }
 
     Dias.innerHTML = 'Dias';
@@ -119,6 +128,16 @@ const mostrarViagens = () => {
         let Dias = tr.insertCell();
         let Opcoes = tr.insertCell();
 
+        Destino.onclick = () => {
+            preencherDias(v.id);
+        }
+        Inicio.onclick = () => {
+            preencherDias(v.id);
+        }
+        Dias.onclick = () => {
+            preencherDias(v.id);
+        }
+
         //botões de edição e delete
         //Elemento div que contem os botões
         let Div = document.createElement('div');
@@ -128,6 +147,7 @@ const mostrarViagens = () => {
         let btnEdi = document.createElement('button');
         btnEdi.classList.add('button');
         btnEdi.classList.add('secondary');
+        //Ação do botão editar
         btnEdi.onclick = () => {
 
             //Ativa  tela de formulario
@@ -154,6 +174,7 @@ const mostrarViagens = () => {
         btnDel.classList.add('button');
         btnDel.classList.add('danger');
         btnDel.setAttribute('data-id', v.id);
+        //Ação do botão deletar
         btnDel.onclick = () => {
             delViagem(v.id);
         }
@@ -240,8 +261,11 @@ const editViagem = (inputDestino, inputInico, inputDias) => {
         let i = viagens.findIndex((v) => v.id == idViagem);
         //Cria um vetor com a quantidade de dias 
         let dias = [];
-        for (let i = 0; i < inputDias.value; i++) {
-            dias[i] = '';
+        for (let j = 0; j < inputDias.value; j++) {
+            if (viagens[i].Dias[j])
+                dias[j] = viagens[i].Dias[j];
+            else
+                dias[j] = '';
         }
 
         //Salva a edição no vetor
@@ -262,12 +286,53 @@ const editViagem = (inputDestino, inputInico, inputDias) => {
 
 //Delete Viagem
 const delViagem = (idViagem) => {
-    viagens = viagens.filter((v) => v.id != idViagem);
-    active('tela1');
-    mostrarViagens();
-    salvarViagens();
+    if (confirm("Tem certeza que quer apagar essa viagem?")) {
+        viagens = viagens.filter((v) => v.id != idViagem);
+        active('tela1');
+        mostrarViagens();
+        salvarViagens();
+    }
 }
 
+//Preencher dias
+const preencherDias = (idViagem) => {
+    //Busca o destino da viagem
+    let i = viagens.findIndex((v) => v.id == idViagem);
+    //Verifica se exite algum dia para preencher
+    if (viagens[i].Dias.length > 0) {
+        //Define o titulo com o nome do destino
+        tituloTela3.innerHTML = viagens[i].Destino;
+        //Ativa Tela 3
+        active('tela3');
+        listaDiasViagem.innerHTML = '';
+        //Monta a lista para cada dia
+        viagens[i].Dias.forEach((dia, j) => {
+            //Cria o elemento li
+            let liDia = document.createElement('li');
+            //Descrição do dia na li:
+            liDia.innerHTML = `Dia ${j}:`
+
+            //Cria elemento input
+            let inputDia = document.createElement('input');
+            inputDia.classList.add('valid')
+            inputDia.setAttribute('autocomplete', 'off')
+            //Insere descrições dos dias ja existetes
+            inputDia.value = dia;
+            //Monitora inserção de dados
+            inputDia.oninput = (e) => {
+                viagens[i].Dias[j] = e.target.value;
+            }
+
+            //insere elemento input denro do <li>
+            liDia.appendChild(inputDia);
+
+            //insere elemento <li> dentro da lista
+            listaDiasViagem.appendChild(liDia);
+        })
+    }
+}
+
+//Salvar Local Storage
 const salvarViagens = () => {
     localStorage.setItem('viagens', JSON.stringify(viagens));
 }
