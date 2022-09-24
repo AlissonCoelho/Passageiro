@@ -46,7 +46,7 @@
     <header class="headerBar header">
       <div class="appName">Passageiro</div>
       <button class="badge secondary">
-        <span id="state">0</span>
+        <span id="badge">0</span>
       </button>
     </header>
     <!--*****************Tela1 Tabela de viagens*****************-->
@@ -68,43 +68,51 @@
     <!--*****************Tela2 Formulario*****************-->
     <div id="tela2" class="component hidden">
       <div class="componentHeader">
-        <h1 class="componentTitle">Adicionar Viagem</h1>
+        <h1 id="tituloTela2" class="componentTitle"></h1>
       </div>
       <div class="componentContent">
         <div class="field mt1">
-          <label for="addDestino" class="fixed">Destino</label>
-          <input id="addDestino" class="valid" autocomplete="off" />
+          <label for="inputDestino" class="fixed">Destino</label>
+          <input
+            id="inputDestino"
+            type="text"
+            class="valid"
+            autocomplete="off"
+          />
         </div>
         <div class="field mt1">
-          <label for="addInico" class="fixed">Data Inicio</label>
-          <input id="addInico" class="valid" autocomplete="off" />
+          <label for="inputInico" class="fixed">Data Inicio</label>
+          <input id="inputInico" type="date" class="valid" autocomplete="off" />
         </div>
         <div class="field mt1">
-          <label for="addDias" class="fixed">Dias</label>
-          <input id="addDias" class="valid" autocomplete="off" />
+          <label for="inputDias" class="fixed">Dias</label>
+          <input
+            id="inputDias"
+            type="number"
+            step="1"
+            class="valid"
+            autocomplete="off"
+          />
         </div>
         <!--Botões de adicionar-->
-        <div  id="btnsAdd" class="">
-          <div class="buttonGroup mt1 ">
-            <button id="btnCanc1" class="button quarter ligth">
-              Calcelar
-            </button>
+        <div id="btnsAdd" class="">
+          <div class="buttonGroup mt1">
+            <button id="btnCanc1" class="button quarter ligth">Calcelar</button>
             <button id="btnAddViagem" class="button quarter primary">
               Adicionar
             </button>
           </div>
         </div>
-        
+
         <!--Botões de editar-->
-      <div id="btnsEdi" class="hidden">
-        <div class="buttonGroup mt1">
-          <button id="btnCanc2" class="button quarter ligth">
-            Calcelar
-          </button>
-          <button id="btnAddEdit" class="button quarter primary">
-            Editar
-           </button>
-      </div>
+        <div id="btnsEdi" class="hidden">
+          <div class="buttonGroup mt1">
+            <button id="btnCanc2" class="button quarter ligth">Calcelar</button>
+            <button id="btnEditViagem" class="button quarter primary">
+              Editar
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </body>

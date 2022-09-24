@@ -8,14 +8,18 @@
 //******APLICATION*******
 
 /*Objetos HTML */
-let addDestino = document.querySelector('#addDestino');
-let addInico = document.querySelector('#addInico');
-let addDias = document.querySelector('#addDias');
+let inputDestino = document.querySelector('#inputDestino');
+let inputInico = document.querySelector('#inputInico');
+let inputDias = document.querySelector('#inputDias');
 let btnAddViagem = document.querySelector('#btnAddViagem')
 let btnAdd = document.querySelector('#btnAdd');
 let btnCanc1 = document.querySelector('#btnCanc1');
 let tbody = document.querySelector('#tbody');
-let state = document.querySelector('#state');
+let badge = document.querySelector('#badge');
+let tituloTela2 = document.querySelector('#tituloTela2');
+let btnsAdd = document.querySelector('#btnsAdd');
+let btnsEdi = document.querySelector('#btnsEdi');
+let btnEditViagem = document.querySelector('#btnEditViagem');
 
 
 let viagens = []
@@ -24,28 +28,33 @@ onload = () => {
     cabecalho();
     btnAdd.onclick = () => {
         active('tela2');
-        addDestino.focus();
+        tituloTela2.innerHTML = 'Adicionar Viagem';
+        inputDestino.focus();
+        btnsAdd.classList.remove('hidden');
+        btnsEdi.classList.add('hidden');
     }
-    document.querySelector('#state').onclick = () => {
+    badge.onclick = () => {
         active('tela1');
     }
     btnCanc1.onclick = () => {
-        addDestino.value = '';
-        addInico.value = '';
-        addDias.value = '';
+        inputDestino.value = '';
+        inputInico.value = '';
+        inputDias.value = '';
         active('tela1');
     }
-    // document.querySelector('#btnCanc2').onclick = () => {
-    //     document.querySelector('#InputEditTask').value = '';
-    //document.querySelector('#InputNewTask').removeAttribute('data-id')
-    //     active('screen1');
-    // }
-    btnAddViagem.onclick = () => {
-        addViagem(addDestino, addInico, addDias);
+    btnCanc2.onclick = () => {
+        inputDestino.value = '';
+        inputInico.value = '';
+        inputDias.value = '';
+        inputDestino.removeAttribute('data-id');
+        active('tela1');
     }
-    // document.querySelector('#btnEdit').onclick = () => {
-    //     ediTask(document.querySelector('#InputEditTask'));
-    // }
+    btnAddViagem.onclick = () => {
+        addViagem(inputDestino, inputInico, inputDias);
+    }
+    btnEditViagem.onclick = () => {
+        editViagem(inputDestino, inputInico, inputDias);
+    }
     // document.querySelector('#btnDel').onclick = () => {
     //     delTask(document.querySelector('#InputEditTask'));
     // }
@@ -88,9 +97,23 @@ const mostrarViagens = () => {
         let btnEdi = document.createElement('button');
         btnEdi.classList.add('button');
         btnEdi.classList.add('secondary');
-        btnEdi.setAttribute('data-id', v.id);
         btnEdi.onclick = () => {
+
+            //Ativa  tela de formulario
             active('tela2');
+            //Defini o titulo
+            tituloTela2.innerHTML = 'Editar Viagem';
+            //defino o foco
+            inputDestino.focus();
+            //Ativa botões de edição
+            btnsAdd.classList.add('hidden');
+            btnsEdi.classList.remove('hidden');
+            //Define valores nos campos
+            inputDestino.value = v.Destino;
+            inputDestino.setAttribute('data-id', v.id);
+            inputInico.value = v.Inicio;
+            inputDias.value = v.Dias.length;
+            inputDestino.focus();
 
         }
 
@@ -131,7 +154,7 @@ const mostrarViagens = () => {
         Opcoes.appendChild(Div);
 
     })
-    state.innerHTML = viagens.length;
+    badge.innerHTML = viagens.length;
 }
 
 //Active screens
@@ -145,45 +168,63 @@ const active = (comp) => {
 }
 
 //Add Viagem
-const addViagem = (addDestino, addInico, addDias) => {
+const addViagem = (inputDestino, inputInico, inputDias) => {
     //Verifica se destino é diferente de vazio
-    if (addDestino.value != '') {
+    if (inputDestino.value != '') {
         //Cria um vetor com a quantidade de dias 
         let dias = [];
-        for (let i = 0; i < addDias.value; i++) {
+        for (let i = 0; i < inputDias.value; i++) {
             dias[i] = '';
         }
         //adiciona a viagem ao vetor dia
         viagens.push(
             {
                 id: Math.random().toString().replace('0.', ''),
-                Destino: addDestino.value,
-                Inicio: addInico.value,
+                Destino: inputDestino.value,
+                Inicio: inputInico.value,
                 Dias: dias
             }
         )
+        //Limpa o formulario
+        inputDestino.value = '';
+        inputInico.value = '';
+        inputDias.value = '';
+
         active('tela1');
         mostrarViagens();
         // saveTasks();
-        addDestino.value = '';
-        addInico.value = '';
-        addDias.value = '';
+
     }
 }
 
-// //Edit Task
-// const ediTask = (InputEditTask) => {
-//     if (InputEditTask.value != '') {
-//         let idTask = InputEditTask.getAttribute('data-id');
-//         let i = tasks.findIndex((t) => t.id == idTask);
-//         tasks[i].description = InputEditTask.value
-//         InputEditTask.value = '';
-//         InputEditTask.removeAttribute('data-id');
-//         active('screen1');
-//         saveTasks();
-//         showTasks();
-//     }
-// }
+//Edit Viagem
+const editViagem = (inputDestino, inputInico, inputDias) => {
+    //Verifica se destino é diferente de vazio
+    if (inputDestino.value != '') {
+        //Busca o valor do ID
+        let idViagem = inputDestino.getAttribute('data-id');
+        //Selecionar o indice onde está o ID
+        let i = viagens.findIndex((v) => v.id == idViagem);
+        //Cria um vetor com a quantidade de dias 
+        let dias = [];
+        for (let i = 0; i < inputDias.value; i++) {
+            dias[i] = '';
+        }
+
+        //Salva a edição no vetor
+        viagens[i].Destino = inputDestino.value;
+        viagens[i].Inicio = inputInico.value;
+        viagens[i].Dias = dias;
+
+        //Limpa o formulario
+        inputDestino.value = '';
+        inputInico.value = '';
+        inputDias.value = '';
+        inputDestino.removeAttribute('data-id');
+        active('tela1');
+        mostrarViagens();
+    }
+}
 
 // //Delete Task
 // const delTask = (InputEditTask) => {
