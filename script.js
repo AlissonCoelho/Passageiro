@@ -97,7 +97,7 @@ const cabecalho = () => {
         salvarViagens();
     }
 
-    Inicio.innerHTML = 'Inicio';
+    Inicio.innerHTML = 'Início';
     Inicio.onclick = () => {
         viagens.sort((a, b) => {
             if (a.Inicio < b.Inicio)
@@ -310,7 +310,7 @@ const preencherDias = (idViagem) => {
             //Cria o elemento li
             let liDia = document.createElement('li');
             //Descrição do dia na li:
-            liDia.innerHTML = `Dia ${j}:`
+            liDia.innerHTML = `Dia ${j + 1}:`
 
             //Cria elemento input
             let inputDia = document.createElement('input');
