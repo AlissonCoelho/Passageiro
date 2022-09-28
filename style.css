@@ -280,7 +280,6 @@ li.active {
 }
 .table tr {
   margin: 0;
-  padding: 0;
   padding: 1rem;
   color: #000;
   background: #edf6f9;
@@ -317,13 +316,17 @@ li.active {
   border-radius: 00.35rem 0.35rem 0.35rem 0.35rem;
 }
 tr.tableHeader {
+  height: 1.5rem;
   color: #fff;
   background-color: #3b78ac;
   border: thin solid #000;
 }
-.tableHeader button {
-  width: 200%;
+tr.tableHeader td:active {
+  color: #fff;
+  background-color: #19568a;
+  border: thin solid #084579;
 }
+
 /**************COLORS**************/
 .active {
   color: #fff;
